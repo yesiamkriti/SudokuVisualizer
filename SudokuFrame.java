@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -22,7 +23,7 @@ public class SudokuFrame extends JFrame {
 
     public SudokuFrame() {
         setTitle("Sudoku Visualizer");
-        setSize(600, 600);
+        setSize(600, 700); // Adjusted size to accommodate slider
         setLayout(new BorderLayout());
 
         JPanel gridPanel = new JPanel(new GridLayout(SIZE, SIZE));
@@ -31,6 +32,7 @@ public class SudokuFrame extends JFrame {
                 cells[i][j] = new JTextField();
                 cells[i][j].setHorizontalAlignment(JTextField.CENTER);
                 cells[i][j].setFont(new Font("Arial", Font.BOLD, 20));
+                cells[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 final int row = i;
                 final int col = j;
                 cells[i][j].addKeyListener(new KeyAdapter() {
@@ -45,9 +47,11 @@ public class SudokuFrame extends JFrame {
         add(gridPanel, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.DARK_GRAY); // Set background color for button panel
 
         // Initialize solveButton
         solveButton = new JButton("Solve");
+        customizeButton(solveButton, Color.GREEN);
         solveButton.addActionListener(e -> {
             solverWorker = new SolverWorker();
             solverWorker.execute();
@@ -57,22 +61,26 @@ public class SudokuFrame extends JFrame {
 
         // Initialize hintButton
         hintButton = new JButton("Hint");
+        customizeButton(hintButton, Color.BLUE);
         hintButton.addActionListener(e -> provideHint());
         buttonPanel.add(hintButton);
 
         // Initialize resetButton
         resetButton = new JButton("Reset");
+        customizeButton(resetButton, Color.ORANGE);
         resetButton.addActionListener(e -> resetBoard());
         buttonPanel.add(resetButton);
 
         // Initialize EndButton
         EndButton = new JButton("Exit Game");
+        customizeButton(EndButton, Color.RED);
         EndButton.addActionListener(e -> dispose()); // Close the current SudokuFrame instance
         EndButton.setVisible(false); // Initially hide EndButton
         buttonPanel.add(EndButton);
 
         // Initialize stopButton
         stopButton = new JButton("Stop");
+        customizeButton(stopButton, Color.MAGENTA);
         stopButton.addActionListener(e -> {
             if (solverWorker != null) {
                 solverWorker.cancel(true); // Stop the solver worker if it's running
@@ -84,11 +92,22 @@ public class SudokuFrame extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
 
         JSlider speedSlider = new JSlider(JSlider.HORIZONTAL, 0, 1000, delay);
+        speedSlider.setMajorTickSpacing(200);
+        speedSlider.setMinorTickSpacing(50);
+        speedSlider.setPaintTicks(true);
+        speedSlider.setPaintLabels(true);
+        speedSlider.setBackground(Color.LIGHT_GRAY);
         speedSlider.addChangeListener(e -> delay = speedSlider.getValue());
         add(speedSlider, BorderLayout.NORTH);
 
         initialBoard = generateRandomSudoku();
         resetBoard();
+    }
+
+    private void customizeButton(JButton button, Color color) {
+        button.setBackground(color);
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Arial", Font.BOLD, 14));
     }
 
     private void hideGameButtons() {
@@ -215,17 +234,15 @@ public class SudokuFrame extends JFrame {
     }
 
     private void removeDigits(int[][] board) {
-        int count = 30; // Number of cells to remove
+        int count = 50; // Number of cells to remove
         while (count != 0) {
             int cellId = new Random().nextInt(SIZE * SIZE);
-            int i = (cellId / SIZE);
+            int i = cellId / SIZE;
             int j = cellId % SIZE;
-            if (j != 0)
-                j -= 1;
 
             if (board[i][j] != 0) {
-                count--;
                 board[i][j] = 0;
+                count--;
             }
         }
     }
@@ -349,16 +366,19 @@ public class SudokuFrame extends JFrame {
                         for (int num = 1; num <= SIZE; num++) {
                             if (isValid(board, row, col, num)) {
                                 board[row][col] = num;
+                                cells[row][col].setBackground(Color.CYAN);
                                 publish(copyBoard(board));
                                 Thread.sleep(delay);
                                 if (isCancelled()) { // Check if the task is cancelled
                                     return false;
                                 }
                                 if (solveWithVisualization(board)) {
+                                    cells[row][col].setBackground(Color.GREEN);
                                     return true;
                                 } else {
                                     board[row][col] = 0;
                                     publish(copyBoard(board));
+                                    cells[row][col].setBackground(Color.PINK); 
                                     Thread.sleep(delay);
                                 }
                             }
@@ -379,3 +399,4 @@ public class SudokuFrame extends JFrame {
         });
     }
 }
+
