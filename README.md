@@ -10,5 +10,5 @@ Developed an interactive Sudoku visualizer with real-time input validation, hint
 • Utilized Java Swing for the graphical user interface, providing a responsive and interactive user experience.<br/>
 <a href="https://github.com/yesiamkriti/SudokuVisualizer">SudokuVisualizer</a>
 <img src="https://github.com/user-attachments/assets/8970cb7d-9d40-42b9-b830-480dd46d4d13">
-![Screenshot 2024-07-12 103420](https://github.com/user-attachments/assets/b05e3a5e-6be5-415f-bf5d-bd548d31c5bd)
-![Screenshot 2024-07-12 103436](https://github.com/user-attachments/assets/5b8e6d93-947a-4b08-bc68-1c92b5341dd3)
+<img src="https://github.com/user-attachments/assets/b05e3a5e-6be5-415f-bf5d-bd548d31c5bd">
+<img src="https://github.com/user-attachments/assets/5b8e6d93-947a-4b08-bc68-1c92b5341dd3">
