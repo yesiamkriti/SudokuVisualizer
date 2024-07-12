@@ -8,7 +8,10 @@ Developed an interactive Sudoku visualizer with real-time input validation, hint
 • Added control buttons (Solve, Hint, Reset, Stop, Exit) for enhanced game control, including a Stop button to cancel the solving process, improving user control and flexibility.<br/>
 • Optimized the input validation logic to ensure only valid entries (numbers 1-9) are accepted, enhancing data integrity and user experience.<br/>
 • Utilized Java Swing for the graphical user interface, providing a responsive and interactive user experience.<br/>
-<a href="https://github.com/yesiamkriti/SudokuVisualizer">SudokuVisualizer</a>
-<img src="https://github.com/user-attachments/assets/8970cb7d-9d40-42b9-b830-480dd46d4d13">
-<img src="https://github.com/user-attachments/assets/b05e3a5e-6be5-415f-bf5d-bd548d31c5bd">
-<img src="https://github.com/user-attachments/assets/5b8e6d93-947a-4b08-bc68-1c92b5341dd3">
+<a href="https://github.com/yesiamkriti/SudokuVisualizer">SudokuVisualizer</a><br/>
+<img src="https://github.com/user-attachments/assets/9c4539fc-1554-4e3b-9319-cae274378e8c"><hr/>
+<img src="https://github.com/user-attachments/assets/8970cb7d-9d40-42b9-b830-480dd46d4d13"><hr/>
+<img src="https://github.com/user-attachments/assets/b05e3a5e-6be5-415f-bf5d-bd548d31c5bd"><hr/>
+<img src="https://github.com/user-attachments/assets/5b8e6d93-947a-4b08-bc68-1c92b5341dd3"><hr/>
+
+
